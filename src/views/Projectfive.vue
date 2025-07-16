@@ -2,7 +2,7 @@
 import {ref,reactive,computed,onMounted,watch} from 'vue'
 import example1 from '@/components/example1.vue'
 import success from '@/components/sucess.vue'
-import { ElMessage } from 'element-plus'
+import Scale from '@/components/Scale.vue'
 import {useRouter} from 'vue-router'
 const router = useRouter()
 const finishDialogVisible = ref(false)
@@ -82,6 +82,7 @@ onMounted(() => {
 
 </script>
 <template>
+  <Scale  :designDraftWidth="1440" :designDraftHeight="1024">
 <div class="fiveproject">
 <div class="title">固晶机顶针系统结构</div>
 <div class="restart">
@@ -160,6 +161,7 @@ onMounted(() => {
       <example1 v-model:visible="finishExample" @exit="handleExit1"></example1>
 </div> 
 </div>
+</Scale>
 </template>
 <style scoped>
 .fiveproject{

@@ -1,4 +1,5 @@
 <template>
+  <Scale  :designDraftWidth="1440" :designDraftHeight="1024">
   <div class="fourproject">
     <div class="title">晶片台结构</div>
    <div class="restart">
@@ -138,12 +139,13 @@
       <example v-model:visible="finishExample" @exit="handleExit1"></example>
       </div>
       </div>
+      </Scale>
 </template>
 <script setup>
 import {ref,reactive,computed,onMounted,watch} from 'vue'
 import example from '@/components/example.vue'
 import success from '@/components/sucess.vue'
-import { ElMessage } from 'element-plus'
+import Scale from '@/components/Scale.vue'
 import {useRouter} from 'vue-router'
 const router = useRouter()
 const finishDialogVisible = ref(false)

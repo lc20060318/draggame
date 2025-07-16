@@ -2,7 +2,7 @@
 import {ref,reactive,computed,onMounted,watch} from 'vue'
 import example3 from '@/components/example3.vue'
 import success from '@/components/sucess.vue'
-import { ElMessage } from 'element-plus'
+import Scale from '@/components/Scale.vue'
 import {useRouter} from 'vue-router'
 const router = useRouter()
 const finishDialogVisible = ref(false)
@@ -92,6 +92,7 @@ onMounted(() => {
 
 </script>
 <template>
+  <scale :designDraftWidth="1440" :designDraftHeight="1024">
     <div class="tenproject">
         <div class="title">ZY0808FG自动分选机各部件</div>
    <div class="restart">
@@ -218,6 +219,7 @@ onMounted(() => {
           <example3 v-model:visible="finishExample" @exit="handleExit1"></example3>
     </div>
     </div>
+    </scale>
 </template>
 <style scoped>
 .tenproject{
