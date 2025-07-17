@@ -44,32 +44,40 @@ const handleClose = () => {
   width: 90%;
   max-width: 1000px;
   height: 85vh;
-  background: url('../assets/ZY0808FG自动分选机各部件例图.png') no-repeat center center;
+  /* 关键调整：让背景图左上角与容器左上角对齐 */
+  background: url('../assets/ZY0808FG自动分选机各部件例图.png') no-repeat 0 0; 
   background-size: contain;
   border-radius: 16px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-  /* 移除overflow: hidden，避免裁剪按钮 */
 }
 
 .close-btn {
-  position: absolute;
-  top: -24px; /* 增加顶部距离 */
-  left: 10px; /* 增加右侧距离 */
-  width: 48px;
-  height: 48px;
+ position: absolute;
+  /* 关键：与背景图左上角对齐 */
+  top: -20px;  
+  left: -20px; 
+  width: 56px;
+  height: 56px;
   border: none;
   border-radius: 50%;
-  background: linear-gradient(135deg, #FF5252 0%, #F44336 100%);
+  background: linear-gradient(135deg, #ff5252, #ff1744);
   color: white;
-  font-size: 28px;
-  font-weight: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 36px;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(244, 67, 54, 0.4);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(255,23,68,0.4);
+  transition: all 0.25s;
   z-index: 10;
+}
+
+/* 针对移动设备（安卓端等小屏幕）微调 */
+@media (max-width: 768px) {
+  .close-btn {
+    top: -2.5%; 
+    left: -2.5%; 
+    width: 8%; 
+    height: 8%; 
+    font-size: clamp(20px, 4vw, 30px); 
+  }
 }
 
 .close-btn:hover {

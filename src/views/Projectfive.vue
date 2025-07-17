@@ -80,55 +80,10 @@ finishExample.value = true
 onMounted(() => {
   shuffleSelection()
 })
-const container = ref(null)
-const scaleFactor = ref(1)
 
-onMounted(() => {
-  updateScale()
-  window.addEventListener('resize', updateScale)
-})
-
-const updateScale = () => {
-  if (!container.value) return
-  
-  const designWidth = 1804
-  const designHeight = 1440
-  
-  // 计算基于视口的缩放比例
-  const widthScale = window.innerWidth / designWidth
-  const heightScale = window.innerHeight / designHeight
-  
-  // 使用较小的缩放比例确保内容完整显示
-  let targetScale = Math.min(widthScale, heightScale)
-  
-  // 设置最小缩放限制（确保内容可读）
-  const minScale = 0.6 // 
-  targetScale = Math.max(targetScale, minScale)
-  
-  // 设置最大缩放限制（避免内容过大）
-  const maxScale = 1.0
-  targetScale = Math.min(targetScale, maxScale)
-  
-  scaleFactor.value = targetScale
-  container.value.style.transform = `scale(${targetScale})`
-  
-  // 计算偏移量使内容居中显示
-  const translateX = (window.innerWidth - designWidth * targetScale) / 2
-  const translateY = (window.innerHeight - designHeight * targetScale) / 2
-  
-  container.value.style.transform = `scale(${targetScale}) translate(${translateX / targetScale}px, ${translateY / targetScale}px)`
-  container.value.style.transformOrigin = '0 0'
-}
-
-// 监听容器元素变化，初始化时更新缩放
-watch(container, (newVal) => {
-  if (newVal) {
-    updateScale()
-  }
-})
 </script>
 <template>
-  <Scale  :designDraftWidth="1440" :designDraftHeight="1024">
+  <Scale  :designDraftWidth="1440" :designDraftHeight="1804">
 <div class="fiveproject" ref="container">
 <div class="title">固晶机顶针系统结构</div>
 <div class="restart">
@@ -219,7 +174,7 @@ watch(container, (newVal) => {
   height: 1804px;
   background: #F3F7FD;
   transform: scale(min(100vw / 1440, 100vh / 1804));
-  transform-origin: top left;
+  transform-origin: top right;
   overflow: hidden;
 }
 .title{
@@ -290,14 +245,16 @@ color: #497FED;
 z-index: 0;
 }
 .circle {
+ 
   position: absolute;
-  top:0px;
-  left:60px;
-   width: 100%;
-  height:72px;
+  top: 0;
+  left: 150px;
+  width: 72px;  /* 固定宽度，与图标尺寸匹配 */
+  height: 72px; /* 固定高度，与图标尺寸匹配 */
   background: url('../assets/restart.png') no-repeat center center;
-  background-size: contain; /* 或 cover，控制图片适配方式 */
-  background-position: center; /* 确保居中显示 */
+  background-size: contain;
+  cursor: pointer; /* 直接在这里加cursor，hover时也会生效 */
+
 }
 .main-content {
   position: absolute;
@@ -325,6 +282,9 @@ z-index: 0;
   height:100%;
   background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
+}
+.circle:hover{
+  cursor:pointer
 }
 .main-part{
 position: absolute;
@@ -550,7 +510,7 @@ border-color: #497FED;
   justify-content: center; /* 文字居中显示 */
   font-family: Source Han Sans;
   font-size: 36px;
-  color: #3D3D3D;
+  color:white;
 }
 .s1-1{
     position: absolute;
@@ -821,79 +781,77 @@ z-index: 0;
   background-color: rgba(73, 127, 237, 0.2) !important;
   border-color: #497FED !important;
   border-width: 2px !important;
+
+}
+.snap-hover .text-content {
+  display: flex !important;
+  align-items: center !important; /* 垂直居中 */
+  justify-content: center !important; /* 水平居中 */
+  width: 100% !important;
+  height: 100% !important;
+  white-space: nowrap !important; /* 不换行 */
+  font-size: 24px !important; /* 确保文字大小一致 */
+  color: #497FED !important; /* 文字颜色与背景区分 */
 }
 
+/* 确保目标区域本身也是flex容器 */
+.one, .two, .three, .four, .five {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 /* 拖拽元素样式 */
 .dragging {
   pointer-events: none;
   opacity: 0.8;
   z-index: 9999;
-  transition: transform 0.1s ease-out; /* 添加平滑过渡效果 */
+  transition: transform 0.1s ease-out; 
+  font-size: smaller;
 }
 .matched {
   background-color:#497FED;
   border-style: solid;
   color:white
 }
-.matched .text-content
-{
-  color: white !important; /* 使用 !important 确保覆盖原有颜色 */
-}/* 1. 中层盒子（.sX-2）使用flex布局，负责文字居中 */
-/* 核心优化：拖拽选项文字样式 */
 .s1-3, .s2-3, .s3-3, .s4-3, .s5-3 {
-  /* 强制单行显示 */
+  /* 强制一行显示且完整显示 */
   white-space: nowrap;
-  overflow: hidden; /* 超出容器部分隐藏（配合text-overflow更友好） */
-  text-overflow: ellipsis; /* 超长文字显示省略号（可选，避免完全看不见） */
+  overflow: visible;
   
-  /* 优化居中方式（兼容拖拽定位） */
+  /* 优化水平居中方式 */
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* 精确居中，不受文字长度影响 */
+  transform: translate(-50%, -50%); /* 水平和垂直居中 */
+  text-align: center;
   
-  /* 自适应容器宽度 */
+  /* 文字大小根据内容长度自适应 */
+  font-size: 24px;
   width: auto;
-  max-width: 280px; /* 小于盒子宽度316px，预留边距 */
-  padding: 0 12px; /* 左右留白，避免文字贴边框 */
+  max-width: 240px; /* 限制最大宽度，防止超长文字破坏布局 */
+  padding: 0 10px;
   
-  /* 文字样式统一 */
-  font-family: Source Han Sans;
-  color: #497FED;
-  z-index: 1; /* 确保文字在盒子上方 */
+  /* 确保文字在各种状态下都能正常显示 */
+  box-sizing: border-box;
 }
 
-/* 按文字长度分级设置字号（关键：解决溢出） */
-.s1-3, .s3-3, .s5-3 {
-  /* 短文字：如“顶针”“推顶马达” */
-  font-size: 30px;
-}
-.s2-3, .s4-3 {
-  /* 长文字：如“Y轴位置调节旋钮”“X轴位置调节旋钮” */
-  font-size: 24px; /* 比短文字小6px，避免溢出 */
-}
 
-/* 选项盒子容器样式（辅助居中） */
+/* 调整盒子容器样式 */
 .s1-2, .s2-2, .s3-2, .s4-2, .s5-2 {
-  position: relative; /* 作为文字定位基准 */
-  width: 316px;
-  height: 80px;
+  position: relative;
+  width: 268px;
+  height: 72px;
   background: #E0EAFF;
-  /* 可选：添加圆角和阴影提升美观度 */
 }
 
-/* 外层容器调整（不影响居中） */
+/* 外层容器调整 */
 .s1-1, .s2-1, .s3-1, .s4-1, .s5-1 {
-  padding: 10px;
-  position: absolute;
-  width: 336px;
-  height: 100px;
+  padding: 5px; /* 减小内边距，使整体布局更紧凑 */
 }
 </style>
 <style>
-/* 禁用整个页面的滚动条和滚动行为 */
 html, body {
-  overflow: hidden !important; /* 隐藏滚动条 */
+  overflow: hidden !important; 
   height: 100% !important;
   width: 100% !important;
   margin: 0 !important;

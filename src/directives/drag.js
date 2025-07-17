@@ -27,16 +27,16 @@ const dragDirective = {
       cloneNode.style.pointerEvents = 'none'
       cloneNode.style.boxSizing = 'border-box'
       cloneNode.classList.add('dragging')
-      
+     
       // 重置可能影响布局的样式
       cloneNode.style.width = `${el.offsetWidth}px`
       cloneNode.style.height = `${el.offsetHeight}px`
       cloneNode.style.margin = '0'
-      cloneNode.style.padding = '0'
+      cloneNode.style.padding = '15px 0px 0px 0px'
       cloneNode.style.transform = 'none'
       cloneNode.style.transition = 'none'
-      
-      return cloneNode
+       cloneNode.style.fontSize = '15px'
+      return cloneNode;
     }
 
     // 更新节点位置 - 确保元素中心与指针位置对齐
@@ -59,7 +59,6 @@ const dragDirective = {
         const distanceY = Math.abs(y - targetCenterY)
         
         if (distanceX < SNAP_THRESHOLD && distanceY < SNAP_THRESHOLD) {
-          // 吸附到目标中心
           node.style.left = `${targetCenterX - width / 2}px`
           node.style.top = `${targetCenterY - height / 2}px`
           nodeState.isSnapped = true

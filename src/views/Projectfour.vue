@@ -1,5 +1,5 @@
 <template>
-  <Scale  :designDraftWidth="1440" :designDraftHeight="1024">
+  <Scale  :designDraftWidth="1440" :designDraftHeight="1804">
   <div class="fourproject" ref="container">
     <div class="title">晶片台结构</div>
    <div class="restart">
@@ -234,52 +234,7 @@ finishExample.value = true
 onMounted(() => {
   shuffleSelection()
 })
-const container = ref(null)
-const scaleFactor = ref(1)
 
-onMounted(() => {
-  updateScale()
-  window.addEventListener('resize', updateScale)
-})
-
-const updateScale = () => {
-  if (!container.value) return
-  
-  const designWidth = 1804
-  const designHeight = 1440
-  
-  // 计算基于视口的缩放比例
-  const widthScale = window.innerWidth / designWidth
-  const heightScale = window.innerHeight / designHeight
-  
-  // 使用较小的缩放比例确保内容完整显示
-  let targetScale = Math.min(widthScale, heightScale)
-  
-  // 设置最小缩放限制（确保内容可读）
-  const minScale = 0.6 // 
-  targetScale = Math.max(targetScale, minScale)
-  
-  // 设置最大缩放限制（避免内容过大）
-  const maxScale = 1.0
-  targetScale = Math.min(targetScale, maxScale)
-  
-  scaleFactor.value = targetScale
-  container.value.style.transform = `scale(${targetScale})`
-  
-  // 计算偏移量使内容居中显示
-  const translateX = (window.innerWidth - designWidth * targetScale) / 2
-  const translateY = (window.innerHeight - designHeight * targetScale) / 2
-  
-  container.value.style.transform = `scale(${targetScale}) translate(${translateX / targetScale}px, ${translateY / targetScale}px)`
-  container.value.style.transformOrigin = '0 0'
-}
-
-// 监听容器元素变化，初始化时更新缩放
-watch(container, (newVal) => {
-  if (newVal) {
-    updateScale()
-  }
-})
 </script>
 <style scoped>
 .fourproject {
@@ -371,6 +326,7 @@ z-index: 0;
   background: url('../assets/restart.png') no-repeat center center;
   background-size: contain; /* 或 cover，控制图片适配方式 */
   background-position: center; /* 确保居中显示 */
+  cursor: pointer;
 }
 .content-title {
   position: absolute;
@@ -391,6 +347,7 @@ z-index: 0;
   background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
 }
+
 .main-part {
   position: absolute;
   left: 346px;
@@ -1265,49 +1222,44 @@ color: #497FED;
 	
 z-index: 0;
 }
-/* 统一设置所有选项文字的居中样式 */
 .s1-3, .s2-3, .s3-3, .s4-3, .s5-3, 
 .s6-3, .s7-3, .s8-3, .s9-3, .s10-3, .s11-3 {
   /* 强制一行显示且完整显示 */
-  white-space: nowrap; /* 不换行 */
-  overflow: visible; /* 不隐藏溢出（已通过字号和宽度适配） */
+  white-space: nowrap;
+  overflow: visible;
   
-  /* 水平居中：取消固定left，改为弹性盒居中 */
-  position: absolute; /* 保留绝对定位 */
-  top: 50%; /* 垂直方向居中基准 */
-  left: 0;
-  right: 0; /* 左右自适应 */
-  transform: translateY(-50%); /* 垂直居中（抵消top:50%的偏移） */
-  text-align: center; /* 文字水平居中 */
+  /* 优化水平居中方式 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 水平和垂直居中 */
+  text-align: center;
   
-  /* 字号和宽度适配（确保完整显示） */
-  font-size: 22px; /* 基础字号 */
-  width: auto; /* 宽度自适应文字（避免固定宽度导致居中偏移） */
-  padding: 0 10px; /* 左右留间隙，避免贴边 */
-  margin: 0 auto; /* 配合left/right实现水平居中 */
+  /* 文字大小根据内容长度自适应 */
+  font-size: 24px;
+  width: auto;
+  max-width: 240px; /* 限制最大宽度，防止超长文字破坏布局 */
+  padding: 0 10px;
   
+  /* 确保文字在各种状态下都能正常显示 */
+  box-sizing: border-box;
 }
 
-/* 最长文本单独适配 */
-.s2-3, .s7-3 { /* “Y轴原点感受器”“X轴原点感受器” */
-  font-size: 20px; /* 稍小字号确保完整显示 */
-  width: 260px; /* 固定宽度适配最长文本 */
-}
 
-/* 调整盒子容器样式，配合文字居中 */
+/* 调整盒子容器样式 */
 .s1-2, .s2-2, .s3-2, .s4-2, .s5-2, 
-.s6-2, .s7-2, .s8-2, .s9-2, .s10-2, .s11-2 {
-  position: relative; /* 作为文字容器的定位基准 */
-  width: 280px; /* 固定宽度，确保布局稳定 */
-  height: 80px; /* 固定高度，保持原布局 */
+.s6-2, .s7-2, .s8-2, .s9-2, .s10-2, .s11-2,
+.s12-2, .s13-2, .s14-2, .s15-2, .s16-2 {
+  position: relative;
+  width: 268px;
+  height: 72px;
+  background: #E0EAFF;
 }
 
-/* 外层容器保持原布局，仅微调间距避免重叠 */
-.s2-1, .s7-1 {
-  margin-left: -5px; /* 最长文本盒子左移5px，避免拥挤 */
-}
-.s3-1, .s8-1 {
-  margin-left: 5px; /* 右侧盒子右移5px，补偿间距 */
+/* 外层容器调整 */
+.s1-1, .s2-1, .s3-1, .s4-1, .s5-1, 
+.s6-1, .s7-1, .s8-1, .s9-1, .s10-1, .s11-1 {
+  padding: 5px; /* 减小内边距，使整体布局更紧凑 */
 }
 .matched .text-content,
 .matched .text-content-1 {

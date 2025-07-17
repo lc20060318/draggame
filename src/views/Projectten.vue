@@ -90,55 +90,10 @@ finishExample.value = true
 onMounted(() => {
   shuffleSelection()
 })
-const container = ref(null)
-const scaleFactor = ref(1)
 
-onMounted(() => {
-  updateScale()
-  window.addEventListener('resize', updateScale)
-})
-
-const updateScale = () => {
-  if (!container.value) return
-  
-  const designWidth = 1804
-  const designHeight = 1440
-  
-  // 计算基于视口的缩放比例
-  const widthScale = window.innerWidth / designWidth
-  const heightScale = window.innerHeight / designHeight
-  
-  // 使用较小的缩放比例确保内容完整显示
-  let targetScale = Math.min(widthScale, heightScale)
-  
-  // 设置最小缩放限制（确保内容可读）
-  const minScale = 0.6 // <-- 调整这个值控制最小缩放比例（越小内容越大）
-  targetScale = Math.max(targetScale, minScale)
-  
-  // 设置最大缩放限制（避免内容过大）
-  const maxScale = 1.0
-  targetScale = Math.min(targetScale, maxScale)
-  
-  scaleFactor.value = targetScale
-  container.value.style.transform = `scale(${targetScale})`
-  
-  // 计算偏移量使内容居中显示
-  const translateX = (window.innerWidth - designWidth * targetScale) / 2
-  const translateY = (window.innerHeight - designHeight * targetScale) / 2
-  
-  container.value.style.transform = `scale(${targetScale}) translate(${translateX / targetScale}px, ${translateY / targetScale}px)`
-  container.value.style.transformOrigin = '0 0'
-}
-
-// 监听容器元素变化，初始化时更新缩放
-watch(container, (newVal) => {
-  if (newVal) {
-    updateScale()
-  }
-})
 </script>
 <template>
-  <scale :designDraftWidth="1440" :designDraftHeight="1024">
+  <scale :designDraftWidth="1440" :designDraftHeight="1804">
     <div class="tenproject" ref="container">
         <div class="title">ZY0808FG自动分选机各部件</div>
    <div class="restart">
@@ -355,6 +310,7 @@ z-index: 0;
   background: url('../assets/restart.png') no-repeat center center;
   background-size: contain; /* 或 cover，控制图片适配方式 */
   background-position: center; /* 确保居中显示 */
+  cursor: pointer;
 }
 .main-content{
     position: absolute;
@@ -402,6 +358,7 @@ color: #3D3D3D;
   background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
 }
+
 .main-part{
     position: absolute;
 left: 407px;
@@ -484,7 +441,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* 数字5 */
+
 .five {
   position: absolute;
   left: 1000px;
@@ -499,8 +456,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   flex-direction: column;
   z-index: 0;
 }
-
-/* 数字6 */
 .six {
   position: absolute;
   left: 36px;
@@ -516,7 +471,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* 数字7 */
 .seven {
   position: absolute;
   left: 36px;
@@ -531,8 +485,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   flex-direction: column;
   z-index: 0;
 }
-
-/* 数字8 */
 .eight {
   position: absolute;
   left: 36px;
@@ -547,8 +499,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   flex-direction: column;
   z-index: 0;
 }
-
-/* 数字9 */
 .nine {
   position: absolute;
   left: 36px;
@@ -563,8 +513,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   flex-direction: column;
   z-index: 0;
 }
-
-/* 数字10 */
 .ten {
   position: absolute;
   left: 36px;
@@ -579,7 +527,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   flex-direction: column;
   z-index: 0;
 }
-/* 1 */
 .route1 {
   position: absolute;
   left: 658px;
@@ -600,8 +547,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 2 */
 .route2 {
   position: absolute;
   left: 795px;
@@ -621,8 +566,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 3 */
 .route3 {
   position: absolute;
   left: 795px;
@@ -642,8 +585,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 4 */
 .route4 {
   position: absolute;
   left: 786.5px;
@@ -663,8 +604,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 5 */
 .route5 {
   position: absolute;
   left: 730px;
@@ -684,8 +623,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 6 */
 .route6 {
   position: absolute;
   left: 316px;
@@ -706,8 +643,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 7 */
 .route7 {
   position: absolute;
   left: 316px;
@@ -727,8 +662,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 8 */
 .route8 {
   position: absolute;
   left: 316px;
@@ -748,8 +681,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 9 */
 .route9 {
   position: absolute;
   left: 315px;
@@ -770,8 +701,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-
-/* 10 */
 .route10 {
   position: absolute;
   left: 316px;
@@ -791,7 +720,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-style: dashed;
   border-color: #497FED;
 }
-/* s1系列 */
+
 .s1-1 {
   position: absolute;
   left: 62px;
@@ -834,7 +763,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s2系列 */
+
 .s2-1 {
   position: absolute;
   left: 488px;
@@ -877,7 +806,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s3系列 */
+
 .s3-1 {
   position: absolute;
   left: 911px;
@@ -920,7 +849,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s4系列 */
+
 .s4-1 {
   position: absolute;
   left: 60px;
@@ -963,7 +892,6 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s5系列 */
 .s5-1 {
   position: absolute;
   left: 488px;
@@ -1006,7 +934,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s6系列 */
+
 .s6-1 {
   position: absolute;
   left: 912px;
@@ -1049,7 +977,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s7系列 */
+
 .s7-1 {
   position: absolute;
   left: 59px;
@@ -1092,7 +1020,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s8系列 */
+
 .s8-1 {
   position: absolute;
   left: 487px;
@@ -1135,7 +1063,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s9系列 */
+
 .s9-1 {
   position: absolute;
   left: 912px;
@@ -1178,7 +1106,7 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   z-index: 0;
 }
 
-/* s10系列 */
+
 .s10-1 {
   position: absolute;
   left: 61px;
@@ -1220,59 +1148,42 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   color: #497FED;
   z-index: 0;
 }
-/* 1. 目标区域文字（.text-content）适配优化 */
+
 .text-content {
-  /* 强制单行显示 */
   white-space: nowrap;
-  /* 文字溢出时不隐藏（配合容器宽度自适应） */
   overflow: visible;
-  
-  /* 绝对居中（关键：解决匹配前后都居中） */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
-  /* 文字大小适配（根据最长文字调整） */
   font-size: 22px;
-  /* 避免文字贴边 */
   padding: 0 10px;
 }
 
-
-/* 3. 拖拽选项文字（.sX-3）适配优化（沿用第一部分思路） */
 .s1-3, .s2-3, .s3-3, .s4-3, .s5-3,
 .s6-3, .s7-3, .s8-3, .s9-3, .s10-3 {
-  /* 强制单行显示 */
   white-space: nowrap;
   overflow: visible;
-  
-  /* 绝对居中（解决拖拽选项文字居中） */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  
-  /* 文字大小根据内容长度自适应 */
   font-size: 24px;
-  /* 宽度自适应文字（避免固定宽度导致溢出） */
   width: auto;
-  /* 限制最大宽度，防止超长文字破坏布局 */
   max-width: 280px;
   padding: 0 10px;
   box-sizing: border-box;
 }
 
-/* 4. 超长文字单独适配（针对已知长文本） */
-.s2-3 { /* 圆振、平振控制器（最长文字） */
-  font-size: 20px; /* 缩小字号避免溢出 */
+.s2-3 { 
+  font-size: 20px; 
 }
-.s7-3 { /* 转盘测试部分 */
+.s7-3 { 
   font-size: 22px;
 }
 
-/* 5. 匹配状态（.matched）文字修正 */
+
 .matched .text-content {
   /* 继承未匹配时的居中样式（关键：解决匹配后不居中） */
   position: absolute;
@@ -1295,18 +1206,17 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   border-width: 2px !important;
 }
 
-/* 拖拽元素样式 */
+
 
 [v-drag].dragging {
   opacity: 0.8;
   transform: scale(1.05);
   z-index: 999;
-  box-shadow: 0 8px 12px rgba(73, 127, 237, 0.3); /* 匹配主题色的阴影 */
-  transition: all 0.2s ease; /* 添加过渡动画 */
+  box-shadow: 0 8px 12px rgba(73, 127, 237, 0.3); 
+  transition: all 0.2s ease; 
 }
-/* 确保匹配后文字不缩小，保持与未匹配时一致 */
 .matched .text-content {
- font-size: 24px !important; /* 确保匹配后文字大小一致 */
+ font-size: 24px !important; 
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;

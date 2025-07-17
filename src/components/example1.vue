@@ -1,5 +1,4 @@
 <template>
-  <!-- 新增遮罩层容器，包裹原有内容 -->
   <div class="overlay" v-if="visible">
     <div class="main">
       <div class="img-container">
@@ -13,76 +12,74 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue'
-
-const props = defineProps({
-  visible: {
-    type: Boolean,
-    required: true
-  }
-})
-
+const props = defineProps({ visible: { type: Boolean, required: true } })
 const emit = defineEmits(['exit', 'update:visible'])
-
-const handleClose = () => {
-  emit('update:visible', false)
-  emit('exit')
+const handleClose = () => { 
+  emit('update:visible', false); 
+  emit('exit') 
 }
 </script>
 
 <style scoped>
-/* 新增遮罩层样式 */
 .overlay {
   position: fixed;
-  inset: 0; /* 覆盖整个视口 */
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩 */
-  backdrop-filter: blur(2px); /* 磨砂玻璃效果，增强层次感 */
-  z-index: 99; /* 确保在图片容器下方，作为背景 */
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 99;
   display: flex;
   align-items: center;
-  justify-content: center; /* 使内部内容居中 */
-  animation: overlayFadeIn 0.3s ease-out; /* 遮罩淡入动画 */
+  justify-content: center;
+  animation: overlayFadeIn 0.3s ease-out;
 }
 
-/* 原有主容器保持不变，调整层级 */
 .main {
-  position: relative; /* 改为相对定位，由遮罩层控制居中 */
+  position: relative;
   width: 80%;
   max-width: 1000px;
   height: 80vh;
-  z-index: 100; /* 确保在遮罩层上方 */
+  z-index: 100;
 }
 
 .img-container {
-  position: relative;
+  position: relative; 
   width: 100%;
   height: 100%;
-  background: url('../assets/固晶机顶针系统结构例图.png') no-repeat center center;
+  /* 关键调整：让背景图左上角与容器左上角对齐 */
+  background: url('../assets/固晶机顶针系统结构例图.png') no-repeat 0 0; 
   background-size: contain;
   border-radius: 12px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
   animation: fadeIn 0.3s ease-out;
 }
 
-/* 关闭按钮样式保持不变 */
 .close-btn {
   position: absolute;
-  top: -20px;
-  left: -20px;
-  width: 48px;
-  height: 48px;
+  /* 关键：与背景图左上角对齐 */
+  top: -20px;  
+  left: -20px; 
+  width: 56px;
+  height: 56px;
   border: none;
   border-radius: 50%;
-  background-color: #ff4d4f;
+  background: linear-gradient(135deg, #ff5252, #ff1744);
   color: white;
-  font-size: 32px;
-  font-weight: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 36px;
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255, 77, 79, 0.35);
-  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px rgba(255,23,68,0.4);
+  transition: all 0.25s;
   z-index: 10;
+}
+
+/* 针对移动设备（安卓端等小屏幕）微调 */
+@media (max-width: 768px) {
+  .close-btn {
+    top: -2.5%; 
+    left: -2.5%; 
+    width: 8%; 
+    height: 8%; 
+    font-size: clamp(20px, 4vw, 30px); 
+  }
 }
 
 .close-btn:hover {
@@ -100,13 +97,11 @@ const handleClose = () => {
   transform: translateY(-2px);
 }
 
-/* 新增遮罩层动画 */
 @keyframes overlayFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* 原有图片容器动画保持不变 */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }

@@ -104,58 +104,13 @@ onMounted(() => {
   shuffleSelection()
 })
 
-const container = ref(null)
-const scaleFactor = ref(1)
 
-onMounted(() => {
-  updateScale()
-  window.addEventListener('resize', updateScale)
-})
-
-const updateScale = () => {
-  if (!container.value) return
-  
-  const designWidth = 1804
-  const designHeight = 1440
-  
-  // 计算基于视口的缩放比例
-  const widthScale = window.innerWidth / designWidth
-  const heightScale = window.innerHeight / designHeight
-  
-  // 使用较小的缩放比例确保内容完整显示
-  let targetScale = Math.min(widthScale, heightScale)
-  
-  // 设置最小缩放限制（确保内容可读）
-  const minScale = 0.6 // <-- 调整这个值控制最小缩放比例（越小内容越大）
-  targetScale = Math.max(targetScale, minScale)
-  
-  // 设置最大缩放限制（避免内容过大）
-  const maxScale = 1.0
-  targetScale = Math.min(targetScale, maxScale)
-  
-  scaleFactor.value = targetScale
-  container.value.style.transform = `scale(${targetScale})`
-  
-  // 计算偏移量使内容居中显示
-  const translateX = (window.innerWidth - designWidth * targetScale) / 2
-  const translateY = (window.innerHeight - designHeight * targetScale) / 2
-  
-  container.value.style.transform = `scale(${targetScale}) translate(${translateX / targetScale}px, ${translateY / targetScale}px)`
-  container.value.style.transformOrigin = '0 0'
-}
-
-// 监听容器元素变化，初始化时更新缩放
-watch(container, (newVal) => {
-  if (newVal) {
-    updateScale()
-  }
-})
 </script>
 
 
 
 <template>
-  <Scale :designDraftWidth="1440" :designDraftHeight="1024"> 
+  <Scale :designDraftWidth="1440" :designDraftHeight="1804"> 
 <div class="nineproject" ref="container">
 <div class="title">灌胶机工作台上的各零部件</div>
 <div class="restart">
@@ -472,6 +427,7 @@ z-index: 0;
   background: url('../assets/restart.png') no-repeat center center;
   background-size: contain; /* 或 cover，控制图片适配方式 */
   background-position: center; /* 确保居中显示 */
+  cursor: pointer;
 }
 .main-content {
   position: absolute;
@@ -509,6 +465,7 @@ color: #3D3D3D;
   background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
 }
+
 .main-part{
 position: absolute;
 left: 316px;

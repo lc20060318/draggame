@@ -51,8 +51,8 @@ onBeforeUnmount(() => {
       <slot />
     </div>
   </div>
-</template>
-<style>
+</template >
+<style scoped>
 .screen-root {
   width: 100vw;
   height: 100vh;
