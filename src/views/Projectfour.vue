@@ -1315,3 +1315,13 @@ z-index: 0;
 }
 
 </style>
+<style>
+/* 禁用整个页面的滚动条和滚动行为 */
+html, body {
+  overflow: hidden !important; /* 隐藏滚动条 */
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+</style>
