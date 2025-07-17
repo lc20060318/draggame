@@ -4,6 +4,7 @@ import example3 from '@/components/example3.vue'
 import success from '@/components/sucess.vue'
 import Scale from '@/components/Scale.vue'
 import {useRouter} from 'vue-router'
+import { ElMessage,ElMessageBox } from 'element-plus'
 const router = useRouter()
 const finishDialogVisible = ref(false)
 const finishExample = ref(false)
@@ -50,7 +51,7 @@ const handleDragMatch = (event) => {
     
   }
   else{
-    alert('选择错误，再仔细检查一下')
+   ElMessage.warning('选择错误，再仔细检查一下')
   }
 }
 // 重置游戏
@@ -89,11 +90,56 @@ finishExample.value = true
 onMounted(() => {
   shuffleSelection()
 })
+const container = ref(null)
+const scaleFactor = ref(1)
 
+onMounted(() => {
+  updateScale()
+  window.addEventListener('resize', updateScale)
+})
+
+const updateScale = () => {
+  if (!container.value) return
+  
+  const designWidth = 1804
+  const designHeight = 1440
+  
+  // 计算基于视口的缩放比例
+  const widthScale = window.innerWidth / designWidth
+  const heightScale = window.innerHeight / designHeight
+  
+  // 使用较小的缩放比例确保内容完整显示
+  let targetScale = Math.min(widthScale, heightScale)
+  
+  // 设置最小缩放限制（确保内容可读）
+  const minScale = 0.6 // <-- 调整这个值控制最小缩放比例（越小内容越大）
+  targetScale = Math.max(targetScale, minScale)
+  
+  // 设置最大缩放限制（避免内容过大）
+  const maxScale = 1.0
+  targetScale = Math.min(targetScale, maxScale)
+  
+  scaleFactor.value = targetScale
+  container.value.style.transform = `scale(${targetScale})`
+  
+  // 计算偏移量使内容居中显示
+  const translateX = (window.innerWidth - designWidth * targetScale) / 2
+  const translateY = (window.innerHeight - designHeight * targetScale) / 2
+  
+  container.value.style.transform = `scale(${targetScale}) translate(${translateX / targetScale}px, ${translateY / targetScale}px)`
+  container.value.style.transformOrigin = '0 0'
+}
+
+// 监听容器元素变化，初始化时更新缩放
+watch(container, (newVal) => {
+  if (newVal) {
+    updateScale()
+  }
+})
 </script>
 <template>
   <scale :designDraftWidth="1440" :designDraftHeight="1024">
-    <div class="tenproject">
+    <div class="tenproject" ref="container">
         <div class="title">ZY0808FG自动分选机各部件</div>
    <div class="restart">
    <div class="restart-1">
@@ -223,12 +269,15 @@ onMounted(() => {
 </template>
 <style scoped>
 .tenproject{
-    position: absolute;
+   position: absolute;
   left: 0;
   top: 0;
   width: 1440px;
   height: 1804px;
   background: #F3F7FD;
+  transform: scale(min(100vw / 1440, 100vh / 1804));
+  transform-origin: top left;
+  overflow: hidden;
 }
 .title{
     position: absolute;
@@ -303,7 +352,7 @@ z-index: 0;
   left:60px;
    width: 100%;
   height:72px;
-  background: url('src/assets/屏幕截图 2025-07-16 093054.png') no-repeat center center;
+  background: url('../assets/restart.png') no-repeat center center;
   background-size: contain; /* 或 cover，控制图片适配方式 */
   background-position: center; /* 确保居中显示 */
 }
@@ -350,7 +399,7 @@ color: #3D3D3D;
   left:210px;
   width:100%;
   height:100%;
-  background: url('src/assets/屏幕截图 2025-07-16 122000.png') no-repeat center center;
+  background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
 }
 .main-part{
@@ -368,7 +417,7 @@ justify-content: undefined;
 align-items: undefined;
 padding: NaNpx;
 	
-background: url('src/assets/p-10.png');
+background: url('../assets/ZY0808FG自动分选机各部件.png');
 	
 }
 

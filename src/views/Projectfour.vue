@@ -1,6 +1,6 @@
 <template>
   <Scale  :designDraftWidth="1440" :designDraftHeight="1024">
-  <div class="fourproject">
+  <div class="fourproject" ref="container">
     <div class="title">晶片台结构</div>
    <div class="restart">
    <div class="restart-1">
@@ -136,12 +136,14 @@
       <success v-model:visible="finishDialogVisible"@play-again="handlePlayAgain"
           @exit="handleExit">
       </success>
-      <example v-model:visible="finishExample" @exit="handleExit1"></example>
+     
       </div>
+       <example v-model:visible="finishExample" @exit="handleExit1"></example>
       </div>
       </Scale>
 </template>
 <script setup>
+import { ElMessage } from 'element-plus'
 import {ref,reactive,computed,onMounted,watch} from 'vue'
 import example from '@/components/example.vue'
 import success from '@/components/sucess.vue'
@@ -195,7 +197,7 @@ const handleDragMatch = (event) => {
     
   }
   else{
-    alert('选择错误，再仔细检查一下')
+    ElMessage.warning('选择错误，再仔细检查一下')
   }
 }
 // 重置游戏
@@ -232,6 +234,52 @@ finishExample.value = true
 onMounted(() => {
   shuffleSelection()
 })
+const container = ref(null)
+const scaleFactor = ref(1)
+
+onMounted(() => {
+  updateScale()
+  window.addEventListener('resize', updateScale)
+})
+
+const updateScale = () => {
+  if (!container.value) return
+  
+  const designWidth = 1804
+  const designHeight = 1440
+  
+  // 计算基于视口的缩放比例
+  const widthScale = window.innerWidth / designWidth
+  const heightScale = window.innerHeight / designHeight
+  
+  // 使用较小的缩放比例确保内容完整显示
+  let targetScale = Math.min(widthScale, heightScale)
+  
+  // 设置最小缩放限制（确保内容可读）
+  const minScale = 0.6 // 
+  targetScale = Math.max(targetScale, minScale)
+  
+  // 设置最大缩放限制（避免内容过大）
+  const maxScale = 1.0
+  targetScale = Math.min(targetScale, maxScale)
+  
+  scaleFactor.value = targetScale
+  container.value.style.transform = `scale(${targetScale})`
+  
+  // 计算偏移量使内容居中显示
+  const translateX = (window.innerWidth - designWidth * targetScale) / 2
+  const translateY = (window.innerHeight - designHeight * targetScale) / 2
+  
+  container.value.style.transform = `scale(${targetScale}) translate(${translateX / targetScale}px, ${translateY / targetScale}px)`
+  container.value.style.transformOrigin = '0 0'
+}
+
+// 监听容器元素变化，初始化时更新缩放
+watch(container, (newVal) => {
+  if (newVal) {
+    updateScale()
+  }
+})
 </script>
 <style scoped>
 .fourproject {
@@ -241,6 +289,9 @@ onMounted(() => {
   width: 1440px;
   height: 1804px;
   background: #F3F7FD;
+  transform: scale(min(100vw / 1440, 100vh / 1804));
+  transform-origin: top left;
+  overflow: hidden;
 }
 
 .title {
@@ -317,7 +368,7 @@ z-index: 0;
   left:60px;
    width: 100%;
   height:72px;
-  background: url('src/assets/屏幕截图 2025-07-16 093054.png') no-repeat center center;
+  background: url('../assets/restart.png') no-repeat center center;
   background-size: contain; /* 或 cover，控制图片适配方式 */
   background-position: center; /* 确保居中显示 */
 }
@@ -337,7 +388,7 @@ z-index: 0;
   left:210px;
   width:100%;
   height:100%;
-  background: url('src/assets/屏幕截图 2025-07-16 122000.png') no-repeat center center;
+  background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
 }
 .main-part {
@@ -347,7 +398,7 @@ z-index: 0;
   width: 623px;
   height: 543px;
   background: #f0f0f0; 
-  background: url('src/assets/67e63b4c968d252d6847852bd626b32@1x.png');
+  background: url('../assets/晶片台结构.png');
   background-size: cover; /* 确保图片覆盖容器 */
 }
 .one{

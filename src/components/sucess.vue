@@ -70,7 +70,7 @@ top: 14.29px;
 width: 100%;
 height: 100%;
 opacity: 1;
-background: url('src/assets/屏幕截图 2025-07-15 164857.png');
+background: url('../assets/sucess.png');
 /* 自动布局 */
 	background-size: contain;
 }
