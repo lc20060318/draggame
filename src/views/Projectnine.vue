@@ -328,10 +328,11 @@ onMounted(() => {
 <div class="s16-1" v-show="!correctSelection.has(selection[15].id)">
   <div class="s16-2">
     <div class="s16-3" v-drag :data-id="selection[15].id">{{ selection[15].id }}</div>
-    <success v-model:visible="finishDialogVisible"@play-again="handlePlayAgain"
-          @exit="handleExit"></success>
+   
   </div>
 </div>
+ <success v-model:visible="finishDialogVisible"@play-again="handlePlayAgain"
+          @exit="handleExit"></success>
    <div class="diamond1"></div>
      <div class="diamond2"></div>
      <div class="diamond3"></div>
@@ -1024,9 +1025,9 @@ border-color: #497FED;;
 .route9 {
   position: absolute;
   left: 285px;
-  top: 580px;
-  width: 189px;
-  height: 341px;
+  top: 660px;
+  width: 140px;
+  height: 260px;
   opacity: 1;
   display: flex;
   flex-direction: undefined;
@@ -1042,9 +1043,9 @@ border-color: #497FED;;
 .route10 {
   position: absolute;
   left: 285px;
-  top: 660px;
-  width: 139px;
-  height: 160px;
+  top: 630px;
+  width: 100px;
+  height: 180px;
   opacity: 1;
   display: flex;
   flex-direction: undefined;
@@ -1060,9 +1061,9 @@ border-color: #497FED;;
 .route11 {
   position: absolute;
   left: 285px;
-  top: 634px;
-  width: 107px;
-  height: 83px;
+  top: 590px;
+  width: 57px;
+  height: 150px;
   opacity: 1;
   display: flex;
   flex-direction: undefined;
@@ -1087,7 +1088,7 @@ border-color: #497FED;;
   justify-content: undefined;
   align-items: undefined;
   padding: NaNpx;
-  border-width: 0px 2.67px 2.67px 0px;
+  border-width: 2.67px 0px 0px 2.67px;
   border-style: dashed;
   border-color: #497FED;
 }
@@ -1115,7 +1116,7 @@ border-color: #497FED;;
   position: absolute;
   left: 285px;
   top: 366px;
-  width: 339px;
+  width: 290px;
   height: 44px;
   opacity: 1;
   display: flex;
@@ -1999,8 +2000,8 @@ border-color: #497FED;;
 /* 数字9对应的菱形 */
 .diamond9 {
   position: absolute;
-  left: 469px;
-  top: 570px;
+  left: 420px;
+  top: 650px;
   width: 10px;
   height: 10px;
   background-color: #497FED;
@@ -2010,8 +2011,8 @@ border-color: #497FED;;
 /* 数字10对应的菱形 */
 .diamond10 {
   position: absolute;
-  left: 419px;
-  top: 650px;
+  left: 383px;
+  top: 620px;
   width: 10px;
   height: 10px;
   background-color: #497FED;
@@ -2021,8 +2022,8 @@ border-color: #497FED;;
 /* 数字11对应的菱形 */
 .diamond11 {
   position: absolute;
-  left: 387px;
-  top: 624px;
+  left: 340px;
+  top: 590px;
   width: 10px;
   height: 10px;
   background-color: #497FED;
@@ -2054,7 +2055,7 @@ border-color: #497FED;;
 /* 数字14对应的菱形 */
 .diamond14 {
   position: absolute;
-  left: 619px;
+  left: 570px;
   top: 356px;
   width: 10px;
   height: 10px;

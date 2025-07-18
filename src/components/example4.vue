@@ -41,11 +41,11 @@ const handleClose = () => {
 
 .viewer-container {
   position: relative;
-  left:200px;
+  left:100px;
   width: 90%;
   max-width: 1000px;
   height: 85vh;
-  /* 关键调整：让背景图左上角与容器左上角对齐 */
+  
   background: url('../assets/ZY1010-2.5BD编带机正面外观例图.png') no-repeat 0 0; 
   background-size: contain;
   border-radius: 16px;
@@ -54,7 +54,7 @@ const handleClose = () => {
 
 .close-btn {
  position: absolute;
-  /* 关键：与背景图左上角对齐 */
+  
   top: -20px;  
   left: -20px; 
   width: 56px;
