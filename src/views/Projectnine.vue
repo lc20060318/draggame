@@ -342,6 +342,7 @@ onMounted(() => {
      <div class="diamond8"></div>
      <div class="diamond9"></div>
      <div class="diamond10"></div>
+     <div class="diamond11"></div>
      <div class="diamond12"></div>
      <div class="diamond13"></div>
      <div class="diamond14"></div>
