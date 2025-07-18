@@ -86,9 +86,9 @@ onMounted(() => {
   <Scale  :designDraftWidth="1440" :designDraftHeight="1804">
 <div class="fiveproject" ref="container">
 <div class="title">固晶机顶针系统结构</div>
-<div class="restart">
+<div class="restart" @click="handleReset">
    <div class="restart-1">
-    <div class="restart-2">重新开始</div> <div class="circle" @click="handleReset"></div>
+    <div class="restart-2">重新开始</div> <div class="circle" ></div>
    </div>
       </div>
     <div class="main-content"@dragMatch="handleDragMatch" >
@@ -127,9 +127,9 @@ onMounted(() => {
       </div>
       <div class="route5"></div>
       
-      <div class="s1-1" v-show="!correctSelection.has(selection[0].id)">
+      <div class="s1-1" v-show="!correctSelection.has(selection[0].id)" >
         <div class="s1-2">
-          <div class="s1-3" v-drag :data-id="selection[0].id">{{ selection[0].id }}</div>
+          <div class="s1-3"v-drag :data-id="selection[0].id" >{{ selection[0].id }}</div>
         </div>
       </div>
       
@@ -156,6 +156,14 @@ onMounted(() => {
           <div class="s5-3" v-drag :data-id="selection[4].id">{{ selection[4].id }}</div>
         </div>
       </div>
+      <!-- HTML 结构 -->
+<div class="diamond1"></div>
+<div class="diamond2"></div>
+<div class="diamond3"></div>
+<div class="diamond4"></div>
+<div class="diamond5"></div>
+
+
       <success v-model:visible="finishDialogVisible"@play-again="handlePlayAgain"
           @exit="handleExit">
       </success>
@@ -187,7 +195,7 @@ opacity: 1;
 	
 font-family: Source Han Sans;
 font-size: 50px;
-font-weight: 300;
+font-weight: 400;
 line-height: normal;
 letter-spacing: 0em;
 	
@@ -205,6 +213,7 @@ color: #3D3D3D;
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor:pointer;
 }
 .restart-1{
   /* 自动布局子元素 */
@@ -283,9 +292,7 @@ z-index: 0;
   background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
 }
-.circle:hover{
-  cursor:pointer
-}
+
 .main-part{
 position: absolute;
 left: 364px;
@@ -351,8 +358,15 @@ padding: NaNpx;
 border-width: 3px 3px 0px 0px;
 border-style: dashed;
 border-color: #497FED;
-	
-	
+}
+.diamond1{
+  position: absolute;
+  left:430.5px;
+  top:442px;
+  width: 10px;
+  height: 10px;
+  background-color:  #497FED; 
+  transform: rotate(45deg);
 }
 .two{
 position: absolute;
@@ -393,7 +407,7 @@ border: 3px dashed #497FED;
 .three{
     position: absolute;
 left: 773px;
-top: 546px;
+top: 500px;
 width: 316px;
 height: 80px;
 opacity: 1;
@@ -411,7 +425,7 @@ border: 3px dashed #497FED;
 .route3{
       position: absolute;
 left: 1089px;
-top: 586px;
+top: 540px;
 width: 107px;
 height: 0px;
 opacity: 1;
@@ -547,9 +561,9 @@ z-index: 0;
     /* 自动布局子元素 */
 position:absolute;
 left: 104px;
-top: 14px;
+top: 54px;
 width: 108px;
-height: 52px;
+height: 50px;
 opacity: 1;
 	
 font-family: Source Han Sans;
@@ -807,6 +821,7 @@ z-index: 0;
   z-index: 9999;
   transition: transform 0.1s ease-out; 
   font-size: smaller;
+  
 }
 .matched {
   background-color:#497FED;
@@ -847,6 +862,50 @@ z-index: 0;
 /* 外层容器调整 */
 .s1-1, .s2-1, .s3-1, .s4-1, .s5-1 {
   padding: 5px; /* 减小内边距，使整体布局更紧凑 */
+}
+/* 数字2对应的菱形：left=1186px，top=459px */
+.diamond2 {
+  position: absolute;
+  left: 1186px;
+  top: 380px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+  z-index: 2;
+}
+
+/* 数字3对应的菱形：left=1196px，top=530px */
+.diamond3 {
+  position: absolute;
+  left: 1196px;
+  top: 537px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字4对应的菱形：left=641px，top=757px */
+.diamond4 {
+  position: absolute;
+  left: 641px;
+  top: 757px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字5对应的菱形：left=754px，top=878px */
+.diamond5 {
+  position: absolute;
+  left: 430px;
+  top: 700px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
 }
 </style>
 <style>

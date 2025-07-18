@@ -2,9 +2,9 @@
   <Scale  :designDraftWidth="1440" :designDraftHeight="1804">
   <div class="fourproject" ref="container">
     <div class="title">晶片台结构</div>
-   <div class="restart">
+   <div class="restart" @click="handleReset">
    <div class="restart-1">
-    <div class="restart-2">重新开始</div> <div class="circle" @click="handleReset"></div>
+    <div class="restart-2">重新开始</div> <div class="circle" ></div>
    </div>
       </div>
     <div class="main-content"@dragMatch="handleDragMatch" >
@@ -136,6 +136,17 @@
       <success v-model:visible="finishDialogVisible"@play-again="handlePlayAgain"
           @exit="handleExit">
       </success>
+     <div class="diamond1"></div>
+     <div class="diamond2"></div>
+     <div class="diamond3"></div>
+     <div class="diamond4"></div>
+     <div class="diamond5"></div>
+     <div class="diamond6"></div>
+     <div class="diamond7"></div>
+     <div class="diamond8"></div>
+     <div class="diamond9"></div>
+     <div class="diamond10"></div>
+     <div class="diamond11"></div>
      
       </div>
        <example v-model:visible="finishExample" @exit="handleExit1"></example>
@@ -256,7 +267,7 @@ onMounted(() => {
   width: 250px;
   font-family: "Source Han Sans";
   font-size: 50px;
-  font-weight: 300;
+  font-weight: 400;
   color: #3D3D3D;
 }
  
@@ -455,9 +466,9 @@ border: 3px dashed #497FED;
 }
 .route4{
   position: absolute;
-left: 785px;
+left: 815px;
 top: 563px;
-width: 215px;
+width: 185px;
 height: 36px;
 transform: rotate(180deg);
 opacity: 1;
@@ -578,7 +589,7 @@ border: 3px dashed #497FED;
   position: absolute;
 left: 316px;
 top: 580px;
-width: 139px;
+width: 159px;
 height: 66px;
 opacity: 1;
 border-width: 3px 3px 0px 0px;
@@ -1265,7 +1276,126 @@ z-index: 0;
 .matched .text-content-1 {
   color: white !important; /* 使用 !important 确保覆盖原有颜色 */
 }
+/* 数字1对应的菱形 */
+.diamond1 {
+  position: absolute;
+  left: 776px;
+  top: 439px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 
+/* 数字2对应的菱形 */
+.diamond2 {
+  position: absolute;
+  left: 841px;
+  top: 482px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字3对应的菱形 */
+.diamond3 {
+  position: absolute;
+  left: 918px;
+  top: 522px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字4对应的菱形 */
+.diamond4 {
+  position: absolute;
+  left: 810px;
+  top: 599px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字5对应的菱形 */
+.diamond5 {
+  position: absolute;
+  left: 705px;
+  top: 636px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字6对应的菱形 */
+.diamond6 {
+  position: absolute;
+  left: 733px;
+  top: 715px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字7对应的菱形 */
+.diamond7 {
+  position: absolute;
+  left: 690px;
+  top: 724px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字8对应的菱形 */
+.diamond8 {
+  position: absolute;
+  left: 524px;
+  top: 660px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字9对应的菱形 */
+.diamond9 {
+  position: absolute;
+  left: 470px;
+  top: 646px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字10对应的菱形 */
+.diamond10 {
+  position: absolute;
+  left: 417px;
+  top: 548px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字11对应的菱形 */
+.diamond11 {
+  position: absolute;
+  left: 572px;
+  top: 404px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 </style>
 <style>
 /* 禁用整个页面的滚动条和滚动行为 */

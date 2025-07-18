@@ -113,9 +113,9 @@ onMounted(() => {
   <Scale :designDraftWidth="1440" :designDraftHeight="1804"> 
 <div class="nineproject" ref="container">
 <div class="title">灌胶机工作台上的各零部件</div>
-<div class="restart">
+<div class="restart" @click="handleReset">
    <div class="restart-1">
-    <div class="restart-2">重新开始</div> <div class="circle" @click="handleReset"></div>
+    <div class="restart-2">重新开始</div> <div class="circle" ></div>
    </div>
       </div>
     
@@ -332,7 +332,21 @@ onMounted(() => {
           @exit="handleExit"></success>
   </div>
 </div>
-  
+   <div class="diamond1"></div>
+     <div class="diamond2"></div>
+     <div class="diamond3"></div>
+     <div class="diamond4"></div>
+     <div class="diamond5"></div>
+     <div class="diamond6"></div>
+     <div class="diamond7"></div>
+     <div class="diamond8"></div>
+     <div class="diamond9"></div>
+     <div class="diamond10"></div>
+     <div class="diamond12"></div>
+     <div class="diamond13"></div>
+     <div class="diamond14"></div>
+     <div class="diamond15"></div>
+     <div class="diamond16"></div>
     </div>
     <example2 v-model:visible="finishExample" @exit="handleExit1"></example2>
 </div>
@@ -361,7 +375,7 @@ opacity: 1;
 	
 font-family: Source Han Sans;
 font-size: 50px;
-font-weight: 300;
+font-weight: 400;
 line-height: normal;
 letter-spacing: 0em;
 	
@@ -972,10 +986,10 @@ border-color: #497FED;;
 /* 7 */
 .route7 {
   position: absolute;
-  left: 541px;
-  top: 634px;
-  width: 79px;
-  height: 202px;
+  left: 511px;
+  top: 624px;
+  width: 109px;
+  height: 212px;
   opacity: 1;
   display: flex;
   flex-direction: undefined;
@@ -1027,9 +1041,9 @@ border-color: #497FED;;
 .route10 {
   position: absolute;
   left: 285px;
-  top: 680px;
-  width: 154px;
-  height: 140px;
+  top: 660px;
+  width: 139px;
+  height: 160px;
   opacity: 1;
   display: flex;
   flex-direction: undefined;
@@ -1893,7 +1907,181 @@ border-color: #497FED;;
   align-items: center !important;
   padding: 0 !important;
 }
+/* 数字1对应的菱形 */
+.diamond1 {
+  position: absolute;
+  left: 716px;
+  top: 305px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 
+/* 数字2对应的菱形 */
+.diamond2 {
+  position: absolute;
+  left: 900px;
+  top: 383px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字3对应的菱形 */
+.diamond3 {
+  position: absolute;
+  left: 731px;
+  top: 358px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字4对应的菱形 */
+.diamond4 {
+  position: absolute;
+  left: 837px;
+  top: 473px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字5对应的菱形 */
+.diamond5 {
+  position: absolute;
+  left: 714px;
+  top: 630px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字6对应的菱形 */
+.diamond6 {
+  position: absolute;
+  left: 726px;
+  top: 660px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字7对应的菱形 */
+.diamond7 {
+  position: absolute;
+  left: 506px;
+  top: 614px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字8对应的菱形 */
+.diamond8 {
+  position: absolute;
+  left: 483px;
+  top: 666px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字9对应的菱形 */
+.diamond9 {
+  position: absolute;
+  left: 469px;
+  top: 570px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字10对应的菱形 */
+.diamond10 {
+  position: absolute;
+  left: 419px;
+  top: 650px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字11对应的菱形 */
+.diamond11 {
+  position: absolute;
+  left: 387px;
+  top: 624px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字12对应的菱形 */
+.diamond12 {
+  position: absolute;
+  left: 457px;
+  top: 541px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字13对应的菱形 */
+.diamond13 {
+  position: absolute;
+  left: 564px;
+  top: 435px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字14对应的菱形 */
+.diamond14 {
+  position: absolute;
+  left: 619px;
+  top: 356px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字15对应的菱形 */
+.diamond15 {
+  position: absolute;
+  left: 523.5px;
+  top: 323.5px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字16对应的菱形 */
+.diamond16 {
+  position: absolute;
+  left: 564px;
+  top: 283px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 </style>
 <style>
 /* 禁用整个页面的滚动条和滚动行为 */

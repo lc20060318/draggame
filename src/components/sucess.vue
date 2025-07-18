@@ -36,7 +36,7 @@ width: 919px;
 height: 624px;
 border-radius: 20px;
 opacity: 1;
-background: #D5DBE4;
+background: white;
 	z-index: 9999;
 box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
 	
@@ -65,12 +65,12 @@ z-index: 0;
 }
 .img{
  position: absolute;
-left: 11.08px;
+left: -50px;
 top: 14.29px;
-width: 100%;
-height: 100%;
+width: 300px;
+height: 250px;
 opacity: 1;
-background: url('../assets/sucess.png');
+background: url('../assets/success.png');
 /* 自动布局 */
 	background-size: contain;
 }

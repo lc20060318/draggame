@@ -9,13 +9,15 @@ const dragDirective = {
       touchId: null,
     }
 
-    // 吸附热区大小（像素） - 根据屏幕尺寸动态调整
+    // 吸附热区大小（像素）- 根据屏幕尺寸动态调整
     let SNAP_THRESHOLD = 30;
     const isMobile = window.innerWidth < 768;
-    
     if (isMobile) {
       SNAP_THRESHOLD = 45; // 移动端使用更大的吸附范围
     }
+
+    // 【核心新增】扩大点击触发范围（单位：px），数值越大范围越广
+    const CLICK_RANGE_EXPAND = 20; // 可修改此值（如30表示扩大30px）
 
     // 创建克隆节点
     const createCloneNode = () => {
@@ -35,17 +37,15 @@ const dragDirective = {
       cloneNode.style.padding = '15px 0px 0px 0px'
       cloneNode.style.transform = 'none'
       cloneNode.style.transition = 'none'
-       cloneNode.style.fontSize = '15px'
-      return cloneNode;
+      cloneNode.style.fontSize = '15px'
+      return cloneNode
     }
+    
 
     // 更新节点位置 - 确保元素中心与指针位置对齐
     const updateNodePosition = (node, x, y) => {
-      // 获取元素尺寸
       const width = el.offsetWidth;
       const height = el.offsetHeight;
-      
-      // 计算元素左上角位置（使元素中心与指针位置对齐）
       const left = x - width / 2;
       const top = y - height / 2;
       
@@ -74,10 +74,9 @@ const dragDirective = {
 
     // 检查元素重叠及热区
     const checkOverlap = (mouseX, mouseY) => {
-      const targetClasses = Array.from({ length: 11 }, (_, i) => `.${['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'][i]}`).join(', ')
+      const targetClasses = Array.from({ length: 16 }, (_, i) => `.${['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven','twelve','thirteen','fourteen','fifteen','sixteen'][i]}`).join(', ')
       const targets = document.querySelectorAll(targetClasses)
       
-      // 重置之前的目标元素样式
       if (nodeState.targetElement) {
         nodeState.targetElement.classList.remove('snap-hover')
         nodeState.targetElement = null
@@ -127,19 +126,15 @@ const dragDirective = {
     const handlePointerMove = (e) => {
       if (!nodeState.isDragging) return
       
-      // 获取坐标
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
       
-      // 防止页面滚动
       if (e.cancelable) {
         e.preventDefault();
       }
       
-      // 检查热区和吸附
       checkOverlap(clientX, clientY);
       
-      // 更新位置
       requestAnimationFrame(() => {
         updateNodePosition(nodeState.cloneNode, clientX, clientY);
       });
@@ -149,11 +144,9 @@ const dragDirective = {
     const handlePointerUp = (e) => {
       if (!nodeState.isDragging) return
       
-      // 获取坐标
       const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
       const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
       
-      // 防止页面滚动
       if (e.cancelable) {
         e.preventDefault();
       }
@@ -175,7 +168,6 @@ const dragDirective = {
         );
       }
 
-      // 清理
       if (nodeState.targetElement) {
         nodeState.targetElement.classList.remove('snap-hover');
         nodeState.targetElement = null;
@@ -188,14 +180,13 @@ const dragDirective = {
 
       document.body.style.overflow = '';
       
-      // 移除事件监听
       document.removeEventListener('mousemove', handlePointerMove);
       document.removeEventListener('mouseup', handlePointerUp);
       document.removeEventListener('touchmove', handlePointerMove);
       document.removeEventListener('touchend', handlePointerUp);
     }
 
-    // 处理拖拽开始
+    // 处理拖拽开始（原有逻辑不变）
     const handlePointerDown = (e) => {
       // 忽略右键点击
       if (e.type === 'mousedown' && e.button !== 0) return
@@ -205,7 +196,7 @@ const dragDirective = {
         e.preventDefault();
       }
       
-      // 记录触摸点ID（用于多触摸处理）
+      // 记录触摸点ID
       if (e.touches && e.touches.length > 0) {
         nodeState.touchId = e.touches[0].identifier;
       }
@@ -233,14 +224,45 @@ const dragDirective = {
       document.addEventListener('touchend', handlePointerUp);
     }
 
-    // 初始化
-    el.addEventListener('mousedown', handlePointerDown);
-    el.addEventListener('touchstart', handlePointerDown, { passive: false });
+    // 【核心新增】全局点击事件处理：判断是否在扩大后的范围内
+    const handleGlobalPointerDown = (e) => {
+      // 1. 获取当前点击坐标
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      // 2. 获取元素自身的位置和尺寸（用于计算范围）
+      const elRect = el.getBoundingClientRect();
+
+      // 3. 计算“扩大后的触发范围”（元素原范围向外扩展 CLICK_RANGE_EXPAND）
+      const expandLeft = elRect.left - 50;   // 左边界扩展
+      const expandRight = elRect.right + 50; // 右边界扩展
+      const expandTop = elRect.top - 0;     // 上边界扩展
+      const expandBottom = elRect.bottom + 0; // 下边界扩展
+
+      // 4. 判断点击是否在“扩大后的范围内”
+      const isInExpandRange = (
+        clientX >= expandLeft &&    // 点击x坐标 >= 扩展后的左边界
+        clientX <= expandRight &&   // 点击x坐标 <= 扩展后的右边界
+        clientY >= expandTop &&     // 点击y坐标 >= 扩展后的上边界
+        clientY <= expandBottom     // 点击y坐标 <= 扩展后的下边界
+      );
+
+      // 5. 如果在范围内，触发拖拽开始
+      if (isInExpandRange) {
+        handlePointerDown(e);
+      }
+    }
+
+    // 【修改】初始化：从“元素自身事件”改为“全局事件监听”
+    document.addEventListener('mousedown', handleGlobalPointerDown);
+    document.addEventListener('touchstart', handleGlobalPointerDown, { passive: false });
 
     // 清理
     el._cleanup = () => {
-      el.removeEventListener('mousedown', handlePointerDown);
-      el.removeEventListener('touchstart', handlePointerDown);
+      // 【修改】移除全局事件监听
+      document.removeEventListener('mousedown', handleGlobalPointerDown);
+      document.removeEventListener('touchstart', handleGlobalPointerDown);
+      
       document.removeEventListener('mousemove', handlePointerMove);
       document.removeEventListener('mouseup', handlePointerUp);
       document.removeEventListener('touchmove', handlePointerMove);

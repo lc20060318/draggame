@@ -106,9 +106,9 @@ onMounted(() => {
   <Scale :designDraftWidth="1440" :designDraftHeight="1804">
 <div class="elevenproject"  ref="container">
 <div class="title">ZY1010-2.5BD编带机正面外观</div>
-<div class="restart">
+<div class="restart" @click="handleReset">
    <div class="restart-1">
-    <div class="restart-2">重新开始</div> <div class="circle" @click="handleReset"></div>
+    <div class="restart-2">重新开始</div> <div class="circle" ></div>
    </div>
       </div>
     <div class="main-content"@dragMatch="handleDragMatch" >
@@ -310,6 +310,21 @@ onMounted(() => {
  <success v-model:visible="finishDialogVisible"@play-again="handlePlayAgain"
           @exit="handleExit"></success>
 <example4 v-model:visible="finishExample" @exit="handleExit1"></example4>
+<div class="diamond1"></div>
+     <div class="diamond2"></div>
+     <div class="diamond3"></div>
+     <div class="diamond4"></div>
+     <div class="diamond5"></div>
+     <div class="diamond6"></div>
+     <div class="diamond7"></div>
+     <div class="diamond8"></div>
+     <div class="diamond9"></div>
+     <div class="diamond11"></div>
+     <div class="diamond10"></div>
+     <div class="diamond12"></div>
+     <div class="diamond13"></div>
+     <div class="diamond14"></div>
+     <div class="diamond15"></div>
     </div>
 </div>
 </Scale>
@@ -336,7 +351,7 @@ opacity: 1;
 	
 font-family: Alibaba PuHuiTi 2.0;
 font-size: 40px;
-font-weight: 300;
+font-weight: 400;
 line-height: normal;
 text-align: center;
 letter-spacing: 0em;
@@ -431,9 +446,7 @@ z-index: 0;
   background: url('../assets/mention.png') no-repeat center center;
    background-size: contain;
 }
-.circle:hover{
-  cursor:pointer
-}
+
 .main-part{
     position: absolute;
 left: 406px;
@@ -908,16 +921,16 @@ background: url('../assets/ZY1010-2.5BD编带机正面外观.png');
 .route12 {
   position: absolute;
   left: 286px;
-  top: 497px;
-  width: 205px;
-  height: 0px;
+  top: 477px;
+  width: 215px;
+  height: 20px;
   opacity: 1;
   display: flex;
   flex-direction: undefined;
   justify-content: undefined;
   align-items: undefined;
   padding: NaNpx;
-  border-width: 0px 0px 2.67px 2.67px;
+  border-width: 0px 2.67px 2.67px 0px;
   border-style: dashed;
   border-color: #497FED;
 }
@@ -1681,5 +1694,168 @@ background: url('../assets/ZY1010-2.5BD编带机正面外观.png');
   border-color: #497FED !important;
   border-width: 2px !important;
 }
+/* 数字1对应的菱形 */
+.diamond1 {
+  position: absolute;
+  left: 777px;
+  top: 270px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 
+/* 数字2对应的菱形 */
+.diamond2 {
+  position: absolute;
+  left: 825px;
+  top: 356px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字3对应的菱形 */
+.diamond3 {
+  position: absolute;
+  left: 729px;
+  top: 353px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字4对应的菱形 */
+.diamond4 {
+  position: absolute;
+  left: 684px;
+  top: 417px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字5对应的菱形 */
+.diamond5 {
+  position: absolute;
+  left: 671px;
+  top: 476px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字6对应的菱形 */
+.diamond6 {
+  position: absolute;
+  left: 761px;
+  top: 665px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字7对应的菱形 */
+.diamond7 {
+  position: absolute;
+  left: 647px;
+  top: 452px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字8对应的菱形 */
+.diamond8 {
+  position: absolute;
+  left: 614px;
+  top: 469px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字9对应的菱形 */
+.diamond9 {
+  position: absolute;
+  left: 561px;
+  top: 721px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字10对应的菱形 */
+.diamond10 {
+  position: absolute;
+  left: 582px;
+  top: 531px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字11对应的菱形 */
+.diamond11 {
+  position: absolute;
+  left: 513px;
+  top: 481px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字12对应的菱形 */
+.diamond12 {
+  position: absolute;
+  left: 496px;
+  top: 467px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字13对应的菱形 */
+.diamond13 {
+  position: absolute;
+  left: 480px;
+  top: 458px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字14对应的菱形 */
+.diamond14 {
+  position: absolute;
+  left: 496px;
+  top: 427px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字15对应的菱形 */
+.diamond15 {
+  position: absolute;
+  left: 509px;
+  top: 335px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 </style>

@@ -12,8 +12,8 @@ const selection = reactive([
  { id: '门板' },
   { id: '圆振、平振控制器' },
   { id: '离子风扇' },
-  { id:'供料震动盘' },
-  { id: '分料观察盘' },
+  { id:'供料振动盘' },
+  { id: '分料观察窗口' },
   { id:'集料箱'},
   { id:'转盘测试部分'},
   { id:'急停按钮'},
@@ -24,8 +24,8 @@ const targets = reactive([
   { id: '门板' },
   { id: '圆振、平振控制器' },
   { id: '离子风扇' },
-  { id:'供料震动盘' },
-  { id: '分料观察盘' },
+  { id:'供料振动盘' },
+  { id: '分料观察窗口' },
   { id:'集料箱'},
   { id:'转盘测试部分'},
   { id:'急停按钮'},
@@ -96,9 +96,9 @@ onMounted(() => {
   <scale :designDraftWidth="1440" :designDraftHeight="1804">
     <div class="tenproject" ref="container">
         <div class="title">ZY0808FG自动分选机各部件</div>
-   <div class="restart">
+   <div class="restart" @click="handleReset">
    <div class="restart-1">
-    <div class="restart-2">重新开始</div> <div class="circle" @click="handleReset"></div>
+    <div class="restart-2">重新开始</div> <div class="circle"></div>
    </div>
       </div>
     <div class="main-content"@dragMatch="handleDragMatch" >
@@ -218,6 +218,16 @@ onMounted(() => {
     <success v-model:visible="finishDialogVisible"@play-again="handlePlayAgain"
           @exit="handleExit"></success>
           <example3 v-model:visible="finishExample" @exit="handleExit1"></example3>
+           <div class="diamond1"></div>
+     <div class="diamond2"></div>
+     <div class="diamond3"></div>
+     <div class="diamond4"></div>
+     <div class="diamond5"></div>
+     <div class="diamond6"></div>
+     <div class="diamond7"></div>
+     <div class="diamond8"></div>
+     <div class="diamond9"></div>
+     <div class="diamond10"></div>
     </div>
     </div>
     </scale>
@@ -244,7 +254,7 @@ opacity: 1;
 	
 font-family: Source Han Sans;
 font-size: 40px;
-font-weight: 300;
+font-weight: 400;
 line-height: normal;
 letter-spacing: 0em;
 	
@@ -1222,5 +1232,113 @@ background: url('../assets/ZY0808FG自动分选机各部件.png');
   align-items: center !important;
   padding: 0 !important;
 }
+/* 数字1对应的菱形 */
+.diamond1 {
+  position: absolute;
+  left: 648px;
+  top: 230px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 
+/* 数字2对应的菱形 */
+.diamond2 {
+  position: absolute;
+  left: 790px;
+  top: 374.37px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字3对应的菱形 */
+.diamond3 {
+  position: absolute;
+  left: 790px;
+  top: 397.6px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字4对应的菱形 */
+.diamond4 {
+  position: absolute;
+  left: 781.5px;
+  top: 499.6px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字5对应的菱形 */
+.diamond5 {
+  position: absolute;
+  left: 725px;
+  top: 603.86px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字6对应的菱形 */
+.diamond6 {
+  position: absolute;
+  left: 576px;
+  top: 748px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字7对应的菱形 */
+.diamond7 {
+  position: absolute;
+  left: 677px;
+  top: 516px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字8对应的菱形 */
+.diamond8 {
+  position: absolute;
+  left: 494px;
+  top: 481px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字9对应的菱形 */
+.diamond9 {
+  position: absolute;
+  left: 518.5px;
+  top: 388px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
+
+/* 数字10对应的菱形 */
+.diamond10 {
+  position: absolute;
+  left: 544px;
+  top: 323px;
+  width: 10px;
+  height: 10px;
+  background-color: #497FED;
+  transform: rotate(45deg);
+}
 </style>
